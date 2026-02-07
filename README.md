@@ -1,64 +1,94 @@
 # Paris Toshokan
 
-Single-file HTML launcher for deep-link searches on `https://bibliotheques.paris.fr` with Syracuse facet filters.
+🔎 Search Paris public libraries faster, by arrondissement and library — without fighting the official UI.
 
-## Current behavior
-- Single static file app: `index.html`
-- Canonical Paris libraries dataset in code (from `DATA_LIBRARIES.md`)
-- Search input (`Enter` opens in current tab)
-- Arrondissement-based selection model:
-  - chips `75000..75020` with `off/on/partial` states
-  - global actions:
-    - `Tous les arrondissements`
-    - `Réinitialiser`
-- `Bibliothèques sélectionnées` shown as removable chips (`×`)
-- `Ajouter des bibliothèques` suggestions:
-  - only libraries not already selected
-  - scoped to currently active arrondissements
-- Document types:
-  - `Livre`
-  - `BD`
-  - fallback to both if both unchecked
-- Actions:
-  - `Ouvrir ici`
-  - `Ouvrir dans un nouvel onglet`
-- Theme mode:
-  - `Auto`
-  - `Light`
-  - `Dark`
+🌐 Live: https://franzouille.github.io/paris-toshokan/
 
-## Persistence (`localStorage`)
-Stored in a single settings object:
-- `selectedLibraries: string[]`
-- `documentTypes: { book: boolean, bd: boolean }`
-- `theme: "auto" | "light" | "dark"`
+---
 
-First load only (when no stored selection):
-- `75013 - Italie`
-- `75013 - Jean-Pierre Melville`
-- `75013 - Virginia Woolf`
+## What is Paris Toshokan?
 
-## URL generation
-Generated URL targets Syracuse search with:
-- `_587 = selectedLibraries.join("||")`
-- `_586 = selected types join("||")`
+Paris Toshokan is a lightweight, single-file web app that makes it easy to search the **Paris public libraries catalogue** with precise control over:
 
-Fallbacks:
-- if `selectedLibraries` is empty: use all libraries
-- if no types are checked: use `Livre + BD`
+- Arrondissements
+- Individual libraries
+- Document types (Livre / BD)
+
+It generates a clean, pre-filtered search and opens the results directly on  
+**bibliotheques.paris.fr**, without forcing you to navigate their complex interface.
+
+Think of it as a **fast, human-friendly launcher** for the official catalogue.
+
+---
+
+## Why it exists
+
+The official Paris libraries website is powerful but:
+- hard to filter by multiple libraries
+- slow to reconfigure repeatedly
+- unfriendly on mobile
+
+Paris Toshokan focuses on one thing only:
+> **Get to relevant results as fast as possible.**
+
+---
+
+## Features
+
+- 🔍 Free-text search (title, author, series, etc.)
+- 🗺️ Multi-select by arrondissement
+- 📚 Fine-grained library selection
+- 🧠 Smart defaults (remembers your choices)
+- 🌓 Light / Dark / System theme
+- 📱 Mobile-first, installable on iOS (Add to Home Screen)
+- ⚡ Single `index.html`, no build, no backend
+
+---
+
+## How it works
+
+- All logic runs client-side
+- No data is scraped or duplicated
+- The app only **builds URLs** compatible with the official Paris libraries catalogue (Syracuse)
+- Searches always open on the official website
+
+Paris Toshokan is a **UI and UX layer**, not a replacement.
+
+---
 
 ## Usage
-1. Open `index.html` in Safari, Chrome, or Firefox.
-2. Type a query.
-3. Adjust arrondissement / libraries / types.
-4. Open search in current or new tab.
 
-## iOS quick setup
-1. Save `index.html` in iCloud Drive.
-2. Open in Safari.
-3. Share -> Add to Home Screen.
+1. Open: https://franzouille.github.io/paris-toshokan/
+2. Enter a search term (e.g. *homo sapiens tome 2*, *tardi*, *corto maltese*)
+3. Select one or more arrondissements and libraries
+4. Click **Ouvrir ici** or **Nouvel onglet**
 
-## Development
+On iOS:
+- Open in Safari
+- Share → *Add to Home Screen*  
+→ it behaves like a native app
+
+---
+
+## Tech stack
+
+- Plain HTML / CSS / JavaScript
+- No framework
+- No dependencies
 - No build step
-- No external dependencies
-- Edit `index.html` directly
+- GitHub Pages hosting
+
+---
+
+## Project status
+
+This is a **personal utility project**, built for real daily use.  
+The scope is intentionally limited and focused.
+
+Suggestions and improvements are welcome if they respect the core simplicity.
+
+---
+
+## License
+
+MIT
