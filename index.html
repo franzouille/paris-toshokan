@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Paris Toshokan</title>
+  <meta name="theme-color" content="#f3f5fb" />
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f5fb;
+      --bg-grad-1: rgba(59, 130, 246, 0.12);
+      --bg-grad-2: rgba(16, 185, 129, 0.1);
+      --text: #0f172a;
+      --muted: #475569;
+      --panel: rgba(255, 255, 255, 0.8);
+      --surface: rgba(248, 250, 252, 0.95);
+      --border: rgba(15, 23, 42, 0.12);
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.28);
+      --button-text: #f8fafc;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --bg: #0b1220;
+        --bg-grad-1: rgba(96, 165, 250, 0.24);
+        --bg-grad-2: rgba(34, 197, 94, 0.18);
+        --text: #e5e7eb;
+        --muted: #94a3b8;
+        --panel: rgba(17, 24, 39, 0.8);
+        --surface: rgba(11, 18, 32, 0.62);
+        --border: rgba(148, 163, 184, 0.24);
+        --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+        --accent: #60a5fa;
+        --accent-hover: #3b82f6;
+        --focus-ring: 0 0 0 3px rgba(96, 165, 250, 0.3);
+        --button-text: #07101f;
+      }
+    }
+
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f3f5fb;
+      --bg-grad-1: rgba(59, 130, 246, 0.12);
+      --bg-grad-2: rgba(16, 185, 129, 0.1);
+      --text: #0f172a;
+      --muted: #475569;
+      --panel: rgba(255, 255, 255, 0.8);
+      --surface: rgba(248, 250, 252, 0.95);
+      --border: rgba(15, 23, 42, 0.12);
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.28);
+      --button-text: #f8fafc;
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0b1220;
+      --bg-grad-1: rgba(96, 165, 250, 0.24);
+      --bg-grad-2: rgba(34, 197, 94, 0.18);
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --panel: rgba(17, 24, 39, 0.8);
+      --surface: rgba(11, 18, 32, 0.62);
+      --border: rgba(148, 163, 184, 0.24);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --accent: #60a5fa;
+      --accent-hover: #3b82f6;
+      --focus-ring: 0 0 0 3px rgba(96, 165, 250, 0.3);
+      --button-text: #07101f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% 0%, var(--bg-grad-1), transparent 60%),
+        radial-gradient(1000px 600px at 90% 12%, var(--bg-grad-2), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg));
+    }
+
+    .app {
+      width: min(860px, 100%);
+      display: grid;
+      gap: 12px;
+    }
+
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(20px, 2.8vw, 28px);
+      letter-spacing: 0.2px;
+    }
+
+    .theme-select {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 13px;
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      background: var(--panel);
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+    }
+
+    .panel-body {
+      padding: 16px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .top-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 12px;
+    }
+
+    .section-label {
+      margin: 0 0 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .surface {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+    }
+
+    .search-field {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .search-field svg {
+      flex: 0 0 auto;
+      opacity: 0.9;
+    }
+
+    .search-input {
+      width: 100%;
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .search-input::placeholder {
+      color: var(--muted);
+    }
+
+    .search-field:focus-within,
+    .preset-select:focus,
+    .theme-select:focus {
+      outline: none;
+      box-shadow: var(--focus-ring);
+      border-color: var(--accent);
+    }
+
+    .preset-select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    .hint {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .types {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 10px 12px;
+    }
+
+    .type-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      user-select: none;
+    }
+
+    .type-pill input {
+      width: 16px;
+      height: 16px;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .action-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 0;
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 15px;
+      font-weight: 650;
+      transition: transform 0.08s ease, filter 0.15s ease, background-color 0.15s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    .btn-primary {
+      color: var(--button-text);
+      background: linear-gradient(180deg, #60a5fa, var(--accent));
+      box-shadow: 0 10px 24px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.03);
+      background: linear-gradient(180deg, #3b82f6, var(--accent-hover));
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-weight: 600;
+    }
+
+    .btn-secondary:hover {
+      filter: brightness(1.04);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-size: 13px;
+      cursor: pointer;
+      color: var(--text);
+      background: var(--surface);
+      transition: filter 0.15s ease, transform 0.08s ease;
+    }
+
+    .chip small {
+      margin-left: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .chip:hover {
+      filter: brightness(1.06);
+    }
+
+    .chip:active {
+      transform: translateY(1px);
+    }
+
+    @media (max-width: 740px) {
+      .top-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .panel-body {
+        padding: 14px;
+      }
+
+      .btn {
+        flex: 1 1 auto;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1 class="title">Paris Toshokan</h1>
+      <select id="themeSelect" class="theme-select" aria-label="Thème">
+        <option value="auto">Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </header>
+
+    <section class="panel" aria-label="Lanceur de recherche">
+      <div class="panel-body">
+        <div class="top-grid">
+          <div>
+            <p class="section-label">Recherche</p>
+            <label class="search-field surface" for="queryInput">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2" />
+                <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+              <input id="queryInput" class="search-input" autocomplete="off" placeholder="Ex : homo sapiens tome 2, tardi burma, tintin..." />
+            </label>
+          </div>
+
+          <div>
+            <p class="section-label">Preset</p>
+            <select id="presetSelect" class="preset-select"></select>
+            <div class="hint" id="presetHint" style="margin-top:8px;"></div>
+          </div>
+        </div>
+
+        <div>
+          <p class="section-label">Type de document</p>
+          <div class="types surface">
+            <label class="type-pill"><input type="checkbox" id="bookType" checked /> Livre</label>
+            <label class="type-pill"><input type="checkbox" id="bdType" checked /> BD</label>
+            <span class="hint" id="typeHint"></span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <div class="action-group">
+            <button class="btn btn-primary" id="openHereBtn" type="button">Ouvrir ici <span aria-hidden="true">↗</span></button>
+            <button class="btn btn-secondary" id="openNewTabBtn" type="button">Nouvel onglet <span aria-hidden="true">⤢</span></button>
+            <button class="btn btn-secondary" id="clearBtn" type="button">Effacer</button>
+          </div>
+          <div class="hint" id="queryHint"></div>
+        </div>
+
+        <div class="chips" aria-label="Recherches rapides">
+          <button class="chip" type="button" data-query="homo sapiens tome 2">homo sapiens <small>tome 2</small></button>
+          <button class="chip" type="button" data-query="tardi burma">tardi <small>burma</small></button>
+          <button class="chip" type="button" data-query="sapiens tome 1">sapiens <small>tome 1</small></button>
+          <button class="chip" type="button" data-query="corto maltese">corto <small>maltese</small></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const PRESETS = [
+      {
+        id: "p13",
+        label: "75013 · Italie + J.-P. Melville + Virginia Woolf",
+        libraries: [
+          "75013 - Italie",
+          "75013 - Jean-Pierre Melville",
+          "75013 - Virginia Woolf"
+        ]
+      }
+    ];
+
+    const STORAGE_KEY = "pbux_settings_v1";
+    const DEFAULT_SETTINGS = {
+      presetId: PRESETS[0].id,
+      types: { book: true, bd: true },
+      theme: "auto"
+    };
+
+    const DOM = {
+      queryInput: document.getElementById("queryInput"),
+      presetSelect: document.getElementById("presetSelect"),
+      presetHint: document.getElementById("presetHint"),
+      bookType: document.getElementById("bookType"),
+      bdType: document.getElementById("bdType"),
+      typeHint: document.getElementById("typeHint"),
+      queryHint: document.getElementById("queryHint"),
+      openHereBtn: document.getElementById("openHereBtn"),
+      openNewTabBtn: document.getElementById("openNewTabBtn"),
+      clearBtn: document.getElementById("clearBtn"),
+      themeSelect: document.getElementById("themeSelect"),
+      quickChips: document.querySelectorAll(".chip[data-query]")
+    };
+
+    function encodeFacetFilter(libraries, types) {
+      return encodeURIComponent(
+        JSON.stringify({
+          _587: libraries.join("||"),
+          _586: types.join("||")
+        })
+      );
+    }
+
+    function buildUrl(query, presetId, selectedTypes) {
+      const encodedQuery = encodeURIComponent(query);
+      const preset = PRESETS.find((item) => item.id === presetId) || PRESETS[0];
+      const facetFilter = encodeFacetFilter(preset.libraries, selectedTypes);
+
+      // Format Syracuse: query DSL with FacetFilter JSON URL-encodé injecté dans FacetFilter:'...'
+      return "https://bibliotheques.paris.fr/search.aspx#/Search/(query:(CloudTerms:!(),FacetFilter:'"
+        + facetFilter
+        + "',ForceSearch:!t,InitialSearch:!f,Page:0,PageRange:3,QueryGuid:'',QueryString:'"
+        + encodedQuery
+        + "',ResultSize:50,ScenarioCode:CATALOGUE,ScenarioDisplayMode:display-standard,SearchGridFieldsShownOnResultsDTO:!(),SearchLabel:'',SearchTerms:'"
+        + encodedQuery
+        + "',SortField:!n,SortOrder:0,TemplateParams:(Scenario:'',Scope:Default,Size:!n,Source:'',Support:'',UseCompact:!f),UseSpellChecking:!n),sst:4)";
+    }
+
+    function safeParseJSON(raw, fallback) {
+      try {
+        return raw ? JSON.parse(raw) : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function loadSettings() {
+      const stored = safeParseJSON(localStorage.getItem(STORAGE_KEY), {});
+      const presetExists = PRESETS.some((item) => item.id === stored.presetId);
+      const theme = ["auto", "light", "dark"].includes(stored.theme) ? stored.theme : DEFAULT_SETTINGS.theme;
+      return {
+        presetId: presetExists ? stored.presetId : DEFAULT_SETTINGS.presetId,
+        types: {
+          book: stored?.types?.book !== undefined ? !!stored.types.book : DEFAULT_SETTINGS.types.book,
+          bd: stored?.types?.bd !== undefined ? !!stored.types.bd : DEFAULT_SETTINGS.types.bd
+        },
+        theme
+      };
+    }
+
+    function saveSettings(settings) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+    }
+
+    function applyTheme(theme) {
+      const root = document.documentElement;
+      if (theme === "auto") {
+        root.removeAttribute("data-theme");
+      } else {
+        root.setAttribute("data-theme", theme);
+      }
+    }
+
+    function currentCheckedTypes() {
+      const types = [];
+      if (DOM.bookType.checked) types.push("Livre");
+      if (DOM.bdType.checked) types.push("BD");
+      return types;
+    }
+
+    function selectedTypesWithFallback() {
+      const selected = currentCheckedTypes();
+      return selected.length ? selected : ["Livre", "BD"];
+    }
+
+    function currentQuery() {
+      return DOM.queryInput.value.trim();
+    }
+
+    function currentPreset() {
+      return PRESETS.find((item) => item.id === DOM.presetSelect.value) || PRESETS[0];
+    }
+
+    function renderHints() {
+      const query = currentQuery();
+      const explicitTypes = currentCheckedTypes();
+      DOM.queryHint.textContent = query ? `Recherche : “${query}”` : "";
+      DOM.typeHint.textContent = explicitTypes.length
+        ? `Types : ${explicitTypes.join(" + ")}`
+        : "Types : (aucun) → fallback Livre + BD";
+      DOM.presetHint.textContent = `Bibliothèques : ${currentPreset().libraries.join(" · ")}`;
+    }
+
+    function setQuery(value) {
+      DOM.queryInput.value = value;
+      renderHints();
+      DOM.queryInput.focus();
+      DOM.queryInput.setSelectionRange(DOM.queryInput.value.length, DOM.queryInput.value.length);
+    }
+
+    function openSearch(newTab) {
+      const query = currentQuery();
+      if (!query) {
+        renderHints();
+        DOM.queryInput.focus();
+        return;
+      }
+      const types = selectedTypesWithFallback();
+      const url = buildUrl(query, DOM.presetSelect.value, types);
+      if (newTab) {
+        window.open(url, "_blank", "noopener,noreferrer");
+      } else {
+        location.href = url;
+      }
+    }
+
+    function initPresetOptions(selectedPresetId) {
+      DOM.presetSelect.innerHTML = "";
+      PRESETS.forEach((preset) => {
+        const option = document.createElement("option");
+        option.value = preset.id;
+        option.textContent = preset.label;
+        DOM.presetSelect.appendChild(option);
+      });
+      DOM.presetSelect.value = selectedPresetId;
+    }
+
+    function updateAndSaveSettings() {
+      saveSettings({
+        presetId: DOM.presetSelect.value,
+        types: {
+          book: DOM.bookType.checked,
+          bd: DOM.bdType.checked
+        },
+        theme: DOM.themeSelect.value
+      });
+    }
+
+    function bindEvents() {
+      DOM.queryInput.addEventListener("input", renderHints);
+      DOM.queryInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") openSearch(false);
+      });
+
+      DOM.presetSelect.addEventListener("change", () => {
+        renderHints();
+        updateAndSaveSettings();
+      });
+
+      [DOM.bookType, DOM.bdType].forEach((checkbox) => {
+        checkbox.addEventListener("change", () => {
+          renderHints();
+          updateAndSaveSettings();
+        });
+      });
+
+      DOM.themeSelect.addEventListener("change", () => {
+        applyTheme(DOM.themeSelect.value);
+        updateAndSaveSettings();
+      });
+
+      DOM.openHereBtn.addEventListener("click", () => openSearch(false));
+      DOM.openNewTabBtn.addEventListener("click", () => openSearch(true));
+      DOM.clearBtn.addEventListener("click", () => setQuery(""));
+
+      DOM.quickChips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          setQuery(chip.dataset.query || "");
+          openSearch(false);
+        });
+      });
+    }
+
+    function init() {
+      const settings = loadSettings();
+      initPresetOptions(settings.presetId);
+      DOM.bookType.checked = settings.types.book;
+      DOM.bdType.checked = settings.types.bd;
+      DOM.themeSelect.value = settings.theme;
+      applyTheme(settings.theme);
+      bindEvents();
+      renderHints();
+      setTimeout(() => DOM.queryInput.focus(), 50);
+    }
+
+    init();
+  </script>
+</body>
+</html>
