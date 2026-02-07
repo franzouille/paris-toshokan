@@ -13,12 +13,11 @@
       --bg-grad-2: rgba(16, 185, 129, 0.1);
       --text: #0f172a;
       --muted: #475569;
-      --panel: rgba(255, 255, 255, 0.8);
-      --surface: rgba(248, 250, 252, 0.95);
+      --panel: rgba(255, 255, 255, 0.84);
+      --surface: rgba(248, 250, 252, 0.96);
       --border: rgba(15, 23, 42, 0.12);
       --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
       --accent: #2563eb;
-      --accent-hover: #1d4ed8;
       --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.28);
       --button-text: #f8fafc;
       --radius-lg: 18px;
@@ -33,62 +32,28 @@
         --bg-grad-2: rgba(34, 197, 94, 0.18);
         --text: #e5e7eb;
         --muted: #94a3b8;
-        --panel: rgba(17, 24, 39, 0.8);
-        --surface: rgba(11, 18, 32, 0.62);
+        --panel: rgba(17, 24, 39, 0.84);
+        --surface: rgba(11, 18, 32, 0.68);
         --border: rgba(148, 163, 184, 0.24);
         --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
         --accent: #60a5fa;
-        --accent-hover: #3b82f6;
-        --focus-ring: 0 0 0 3px rgba(96, 165, 250, 0.3);
+        --focus-ring: 0 0 0 3px rgba(96, 165, 250, 0.32);
         --button-text: #07101f;
       }
     }
 
-    :root[data-theme="light"] {
-      color-scheme: light;
-      --bg: #f3f5fb;
-      --bg-grad-1: rgba(59, 130, 246, 0.12);
-      --bg-grad-2: rgba(16, 185, 129, 0.1);
-      --text: #0f172a;
-      --muted: #475569;
-      --panel: rgba(255, 255, 255, 0.8);
-      --surface: rgba(248, 250, 252, 0.95);
-      --border: rgba(15, 23, 42, 0.12);
-      --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
-      --accent: #2563eb;
-      --accent-hover: #1d4ed8;
-      --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.28);
-      --button-text: #f8fafc;
-    }
+    :root[data-theme="light"] { color-scheme: light; }
+    :root[data-theme="dark"] { color-scheme: dark; }
 
-    :root[data-theme="dark"] {
-      color-scheme: dark;
-      --bg: #0b1220;
-      --bg-grad-1: rgba(96, 165, 250, 0.24);
-      --bg-grad-2: rgba(34, 197, 94, 0.18);
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --panel: rgba(17, 24, 39, 0.8);
-      --surface: rgba(11, 18, 32, 0.62);
-      --border: rgba(148, 163, 184, 0.24);
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-      --accent: #60a5fa;
-      --accent-hover: #3b82f6;
-      --focus-ring: 0 0 0 3px rgba(96, 165, 250, 0.3);
-      --button-text: #07101f;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
-      padding: 18px;
+      padding: 14px;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       color: var(--text);
       background:
@@ -98,16 +63,16 @@
     }
 
     .app {
-      width: min(860px, 100%);
+      width: min(920px, 100%);
       display: grid;
-      gap: 12px;
+      gap: 10px;
     }
 
     .app-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
@@ -115,6 +80,12 @@
       margin: 0;
       font-size: clamp(20px, 2.8vw, 28px);
       letter-spacing: 0.2px;
+    }
+
+    .baseline {
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: var(--muted);
     }
 
     .theme-select {
@@ -136,19 +107,13 @@
     }
 
     .panel-body {
-      padding: 16px;
+      padding: 12px;
       display: grid;
-      gap: 14px;
-    }
-
-    .top-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 0.9fr;
-      gap: 12px;
+      gap: 10px;
     }
 
     .section-label {
-      margin: 0 0 8px;
+      margin: 0 0 6px;
       font-size: 13px;
       color: var(--muted);
     }
@@ -163,12 +128,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 12px;
-    }
-
-    .search-field svg {
-      flex: 0 0 auto;
-      opacity: 0.9;
+      padding: 11px;
     }
 
     .search-input {
@@ -180,26 +140,165 @@
       font-size: 16px;
     }
 
-    .search-input::placeholder {
-      color: var(--muted);
-    }
+    .search-input::placeholder { color: var(--muted); }
 
     .search-field:focus-within,
-    .preset-select:focus,
     .theme-select:focus {
       outline: none;
       box-shadow: var(--focus-ring);
       border-color: var(--accent);
     }
 
-    .preset-select {
-      width: 100%;
-      padding: 12px;
+    .arrondissements {
+      padding: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .arr-actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
+    .arr-chip {
       border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      font-size: 14px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
       color: var(--text);
       background: var(--surface);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 30px;
+    }
+
+    .arr-chip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      flex: 0 0 auto;
+    }
+
+    .arr-chip[data-state="on"] {
+      border-color: rgba(37, 99, 235, 0.55);
+      background: rgba(37, 99, 235, 0.16);
+    }
+
+    .arr-chip[data-state="on"] .arr-chip-dot {
+      border-color: var(--accent);
+      background: var(--accent);
+    }
+
+    .arr-chip[data-state="partial"] {
+      border-color: rgba(16, 185, 129, 0.55);
+      background: rgba(16, 185, 129, 0.14);
+    }
+
+    .arr-chip[data-state="partial"] .arr-chip-dot {
+      border-color: #10b981;
+      background: #10b981;
+    }
+
+    .arr-action {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: var(--text);
+      background: var(--surface);
+      cursor: pointer;
+      min-height: 30px;
+    }
+
+    .selected-libraries {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      padding: 9px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .lib-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .lib-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      padding: 6px 8px 6px 10px;
+      font-size: 12px;
+      color: var(--text);
+      max-width: 100%;
+    }
+
+    .lib-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: min(72vw, 420px);
+    }
+
+    .remove-lib {
+      border: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.22);
+      color: var(--text);
+      cursor: pointer;
+      line-height: 1;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      flex: 0 0 auto;
+    }
+
+    .add-section {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      padding: 9px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .add-panels {
+      display: block;
+    }
+
+    .add-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .add-chip {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 12px;
+      padding: 5px 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .hint {
@@ -224,42 +323,34 @@
       user-select: none;
     }
 
-    .type-pill input {
-      width: 16px;
-      height: 16px;
-    }
+    .type-pill input { width: 16px; height: 16px; }
 
     .actions {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
     }
 
     .action-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn {
       appearance: none;
       border: 0;
       border-radius: var(--radius-md);
-      padding: 12px 14px;
+      padding: 11px 13px;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       cursor: pointer;
       user-select: none;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 650;
-      transition: transform 0.08s ease, filter 0.15s ease, background-color 0.15s ease;
-    }
-
-    .btn:active {
-      transform: translateY(1px);
     }
 
     .btn:focus-visible {
@@ -273,11 +364,6 @@
       box-shadow: 0 10px 24px rgba(59, 130, 246, 0.3);
     }
 
-    .btn-primary:hover {
-      filter: brightness(1.03);
-      background: linear-gradient(180deg, #3b82f6, var(--accent-hover));
-    }
-
     .btn-secondary {
       color: var(--text);
       border: 1px solid var(--border);
@@ -285,63 +371,18 @@
       font-weight: 600;
     }
 
-    .btn-secondary:hover {
-      filter: brightness(1.04);
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .chip {
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 8px 10px;
-      font-size: 13px;
-      cursor: pointer;
-      color: var(--text);
-      background: var(--surface);
-      transition: filter 0.15s ease, transform 0.08s ease;
-    }
-
-    .chip small {
-      margin-left: 6px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .chip:hover {
-      filter: brightness(1.06);
-    }
-
-    .chip:active {
-      transform: translateY(1px);
-    }
-
-    @media (max-width: 740px) {
-      .top-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .panel-body {
-        padding: 14px;
-      }
-
-      .btn {
-        flex: 1 1 auto;
-        justify-content: center;
-      }
+    @media (max-width: 760px) {
+      .btn { flex: 1 1 auto; justify-content: center; }
     }
   </style>
 </head>
 <body>
   <main class="app">
     <header class="app-header">
-      <h1 class="title">Paris Toshokan</h1>
+      <div>
+        <h1 class="title">Paris Toshokan</h1>
+        <p class="baseline">Trouvez un livre dans les bibliothèques de Paris, sans vous battre avec les filtres.</p>
+      </div>
       <select id="themeSelect" class="theme-select" aria-label="Thème">
         <option value="auto">Auto</option>
         <option value="light">Light</option>
@@ -351,22 +392,39 @@
 
     <section class="panel" aria-label="Lanceur de recherche">
       <div class="panel-body">
-        <div class="top-grid">
-          <div>
-            <p class="section-label">Recherche</p>
-            <label class="search-field surface" for="queryInput">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2" />
-                <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-              </svg>
-              <input id="queryInput" class="search-input" autocomplete="off" placeholder="Ex : homo sapiens tome 2, tardi burma, tintin..." />
-            </label>
-          </div>
+        <div>
+          <p class="section-label">Recherche</p>
+          <label class="search-field surface" for="queryInput">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2" />
+              <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <input id="queryInput" class="search-input" autocomplete="off" placeholder="Ex : homo sapiens tome 2, tardi burma, tintin..." />
+          </label>
 
-          <div>
-            <p class="section-label">Preset</p>
-            <select id="presetSelect" class="preset-select"></select>
-            <div class="hint" id="presetHint" style="margin-top:8px;"></div>
+        </div>
+
+        <div>
+          <p class="section-label">Arrondissements</p>
+          <div class="arr-actions">
+            <button id="selectAllArrBtn" type="button" class="arr-action">Tous les arrondissements</button>
+            <button id="resetSelectionBtn" type="button" class="arr-action">Réinitialiser</button>
+          </div>
+          <div id="arrondissementControls" class="surface arrondissements" aria-label="Sélection des arrondissements"></div>
+        </div>
+
+        <div>
+          <p class="section-label">Bibliothèques sélectionnées</p>
+          <div class="selected-libraries">
+            <div class="hint" id="selectedCountHint"></div>
+            <div id="selectedLibrariesChips" class="lib-chips"></div>
+          </div>
+        </div>
+
+        <div>
+          <p class="section-label">Ajouter des bibliothèques</p>
+          <div class="add-section">
+            <div id="addPanels" class="add-panels"></div>
           </div>
         </div>
 
@@ -382,79 +440,123 @@
         <div class="actions">
           <div class="action-group">
             <button class="btn btn-primary" id="openHereBtn" type="button">Ouvrir ici <span aria-hidden="true">↗</span></button>
-            <button class="btn btn-secondary" id="openNewTabBtn" type="button">Nouvel onglet <span aria-hidden="true">⤢</span></button>
-            <button class="btn btn-secondary" id="clearBtn" type="button">Effacer</button>
+            <button class="btn btn-secondary" id="openNewTabBtn" type="button">Ouvrir dans un nouvel onglet <span aria-hidden="true">⤢</span></button>
           </div>
           <div class="hint" id="queryHint"></div>
         </div>
 
-        <div class="chips" aria-label="Recherches rapides">
-          <button class="chip" type="button" data-query="homo sapiens tome 2">homo sapiens <small>tome 2</small></button>
-          <button class="chip" type="button" data-query="tardi burma">tardi <small>burma</small></button>
-          <button class="chip" type="button" data-query="sapiens tome 1">sapiens <small>tome 1</small></button>
-          <button class="chip" type="button" data-query="corto maltese">corto <small>maltese</small></button>
-        </div>
       </div>
     </section>
   </main>
 
   <script>
-    const PRESETS = [
-      {
-        id: "p13",
-        label: "75013 · Italie + J.-P. Melville + Virginia Woolf",
-        libraries: [
-          "75013 - Italie",
-          "75013 - Jean-Pierre Melville",
-          "75013 - Virginia Woolf"
-        ]
-      }
+    const ALL_LIBRARIES = [
+      "75000 - Réserve centrale",
+      "75001 - Bibliothèque du cinéma François Truffaut",
+      "75001 - La Canopée",
+      "75001 - Médiathèque Musicale de Paris - Christiane Eda-Pierre",
+      "75001 - Médiathèque Musicale de Paris - Christiane Eda-Pierre - fonds spécialisé",
+      "75002 - Charlotte Delbo",
+      "75003 - Marguerite Audoux",
+      "75004 - Arthur Rimbaud",
+      "75004 - Forney",
+      "75005 - Buffon",
+      "75005 - L'Heure Joyeuse",
+      "75005 - Mohammed Arkoun",
+      "75005 - Rainer Maria Rilke",
+      "75006 - André Malraux",
+      "75007 - Amélie",
+      "75007 - Saint-Simon",
+      "75008 - Agustina Bessa-Luis",
+      "75008 - Jean d'Ormesson",
+      "75009 - Drouot",
+      "75009 - Louise Walser-Gaillard",
+      "75009 - Valeyre",
+      "75010 - Claire Bretécher",
+      "75010 - François Villon",
+      "75010 - Françoise Sagan",
+      "75011 - Toni Morrison",
+      "75011 - Violette Leduc",
+      "75012 - Bibliothèque Paris nature",
+      "75012 - Diderot",
+      "75012 - Hélène Berr",
+      "75012 - Saint-Eloi",
+      "75013 - Italie",
+      "75013 - Jean-Pierre Melville",
+      "75013 - Marina Tsvetaïeva",
+      "75013 - Virginia Woolf",
+      "75014 - Aimé Césaire",
+      "75014 - Benoîte Groult",
+      "75014 - Georges Brassens",
+      "75015 - Andrée Chedid",
+      "75015 - Gutenberg",
+      "75015 - Marguerite Yourcenar",
+      "75015 - Vaugirard",
+      "75016 - Germaine Tillion",
+      "75016 - Musset",
+      "75017 - Batignolles",
+      "75017 - Colette Vivier",
+      "75017 - Edmond Rostand",
+      "75018 - Goutte d'or",
+      "75018 - Jacqueline de Romilly",
+      "75018 - Maurice Genevoix",
+      "75018 - Robert Sabatier",
+      "75018 - Vaclav Havel",
+      "75019 - Astrid Lindgren",
+      "75019 - Benjamin Rabier",
+      "75019 - Claude Lévi-Strauss",
+      "75019 - Hergé",
+      "75019 - Jacqueline Dreyfus-Weill",
+      "75019 - James Baldwin",
+      "75020 - Assia Djebar",
+      "75020 - Louise Michel",
+      "75020 - Marguerite Duras",
+      "75020 - Maryse Condé",
+      "75020 - Mortier",
+      "75020 - Naguib Mahfouz",
+      "75020 - Oscar Wilde"
     ];
 
-    const STORAGE_KEY = "pbux_settings_v1";
-    const DEFAULT_SETTINGS = {
-      presetId: PRESETS[0].id,
-      types: { book: true, bd: true },
-      theme: "auto"
-    };
+    const DEFAULT_SELECTED_LIBRARIES = [
+      "75013 - Italie",
+      "75013 - Jean-Pierre Melville",
+      "75013 - Virginia Woolf"
+    ];
+
+    const STORAGE_KEY = "pbux_settings_v3";
+    const LIBRARY_SET = new Set(ALL_LIBRARIES);
+    const ARRONDISSEMENT_GROUPS = groupLibrariesByArrondissement(ALL_LIBRARIES);
 
     const DOM = {
       queryInput: document.getElementById("queryInput"),
-      presetSelect: document.getElementById("presetSelect"),
-      presetHint: document.getElementById("presetHint"),
+      selectAllArrBtn: document.getElementById("selectAllArrBtn"),
+      resetSelectionBtn: document.getElementById("resetSelectionBtn"),
+      arrondissementControls: document.getElementById("arrondissementControls"),
+      selectedCountHint: document.getElementById("selectedCountHint"),
+      selectedLibrariesChips: document.getElementById("selectedLibrariesChips"),
+      addPanels: document.getElementById("addPanels"),
       bookType: document.getElementById("bookType"),
       bdType: document.getElementById("bdType"),
       typeHint: document.getElementById("typeHint"),
       queryHint: document.getElementById("queryHint"),
       openHereBtn: document.getElementById("openHereBtn"),
       openNewTabBtn: document.getElementById("openNewTabBtn"),
-      clearBtn: document.getElementById("clearBtn"),
-      themeSelect: document.getElementById("themeSelect"),
-      quickChips: document.querySelectorAll(".chip[data-query]")
+      themeSelect: document.getElementById("themeSelect")
     };
 
-    function encodeFacetFilter(libraries, types) {
-      return encodeURIComponent(
-        JSON.stringify({
-          _587: libraries.join("||"),
-          _586: types.join("||")
-        })
-      );
-    }
+    const state = {
+      settings: loadSettings()
+    };
 
-    function buildUrl(query, presetId, selectedTypes) {
-      const encodedQuery = encodeURIComponent(query);
-      const preset = PRESETS.find((item) => item.id === presetId) || PRESETS[0];
-      const facetFilter = encodeFacetFilter(preset.libraries, selectedTypes);
-
-      // Format Syracuse: query DSL with FacetFilter JSON URL-encodé injecté dans FacetFilter:'...'
-      return "https://bibliotheques.paris.fr/search.aspx#/Search/(query:(CloudTerms:!(),FacetFilter:'"
-        + facetFilter
-        + "',ForceSearch:!t,InitialSearch:!f,Page:0,PageRange:3,QueryGuid:'',QueryString:'"
-        + encodedQuery
-        + "',ResultSize:50,ScenarioCode:CATALOGUE,ScenarioDisplayMode:display-standard,SearchGridFieldsShownOnResultsDTO:!(),SearchLabel:'',SearchTerms:'"
-        + encodedQuery
-        + "',SortField:!n,SortOrder:0,TemplateParams:(Scenario:'',Scope:Default,Size:!n,Source:'',Support:'',UseCompact:!f),UseSpellChecking:!n),sst:4)";
+    function groupLibrariesByArrondissement(libraries) {
+      const groups = new Map();
+      libraries.forEach((library) => {
+        const separatorIndex = library.indexOf(" - ");
+        const arrondissement = separatorIndex > 0 ? library.slice(0, separatorIndex) : "Autres";
+        if (!groups.has(arrondissement)) groups.set(arrondissement, []);
+        groups.get(arrondissement).push(library);
+      });
+      return Array.from(groups.entries()).map(([arrondissement, list]) => ({ arrondissement, libraries: list }));
     }
 
     function safeParseJSON(raw, fallback) {
@@ -465,31 +567,43 @@
       }
     }
 
+    function normalizeLibraries(libraries) {
+      const selectedSet = new Set(Array.isArray(libraries) ? libraries.filter((item) => LIBRARY_SET.has(item)) : []);
+      return ALL_LIBRARIES.filter((item) => selectedSet.has(item));
+    }
+
     function loadSettings() {
       const stored = safeParseJSON(localStorage.getItem(STORAGE_KEY), {});
-      const presetExists = PRESETS.some((item) => item.id === stored.presetId);
-      const theme = ["auto", "light", "dark"].includes(stored.theme) ? stored.theme : DEFAULT_SETTINGS.theme;
+      const hasStoredSelection = Array.isArray(stored.selectedLibraries);
+      const selectedLibraries = hasStoredSelection
+        ? normalizeLibraries(stored.selectedLibraries)
+        : normalizeLibraries(DEFAULT_SELECTED_LIBRARIES);
+      const storedDocumentTypes = stored.documentTypes || stored.types || {};
+      const book = storedDocumentTypes.book !== undefined ? !!storedDocumentTypes.book : true;
+      const bd = storedDocumentTypes.bd !== undefined ? !!storedDocumentTypes.bd : true;
+      const theme = ["auto", "light", "dark"].includes(stored.theme) ? stored.theme : "auto";
       return {
-        presetId: presetExists ? stored.presetId : DEFAULT_SETTINGS.presetId,
-        types: {
-          book: stored?.types?.book !== undefined ? !!stored.types.book : DEFAULT_SETTINGS.types.book,
-          bd: stored?.types?.bd !== undefined ? !!stored.types.bd : DEFAULT_SETTINGS.types.bd
-        },
+        selectedLibraries,
+        documentTypes: { book, bd },
         theme
       };
     }
 
-    function saveSettings(settings) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+    function saveSettings() {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          selectedLibraries: state.settings.selectedLibraries,
+          documentTypes: state.settings.documentTypes,
+          theme: state.settings.theme
+        })
+      );
     }
 
     function applyTheme(theme) {
       const root = document.documentElement;
-      if (theme === "auto") {
-        root.removeAttribute("data-theme");
-      } else {
-        root.setAttribute("data-theme", theme);
-      }
+      if (theme === "auto") root.removeAttribute("data-theme");
+      else root.setAttribute("data-theme", theme);
     }
 
     function currentCheckedTypes() {
@@ -500,16 +614,149 @@
     }
 
     function selectedTypesWithFallback() {
-      const selected = currentCheckedTypes();
-      return selected.length ? selected : ["Livre", "BD"];
+      const selectedTypes = currentCheckedTypes();
+      return selectedTypes.length ? selectedTypes : ["Livre", "BD"];
     }
 
     function currentQuery() {
       return DOM.queryInput.value.trim();
     }
 
-    function currentPreset() {
-      return PRESETS.find((item) => item.id === DOM.presetSelect.value) || PRESETS[0];
+    function selectedLibrariesWithFallback() {
+      return state.settings.selectedLibraries.length ? state.settings.selectedLibraries : ALL_LIBRARIES;
+    }
+
+    function encodeFacetFilter(libraries, types) {
+      return encodeURIComponent(JSON.stringify({ _587: libraries.join("||"), _586: types.join("||") }));
+    }
+
+    function buildUrl(query, libraries, selectedTypes) {
+      const encodedQuery = encodeURIComponent(query);
+      const facetFilter = encodeFacetFilter(libraries, selectedTypes);
+      return "https://bibliotheques.paris.fr/search.aspx#/Search/(query:(CloudTerms:!(),FacetFilter:'"
+        + facetFilter
+        + "',ForceSearch:!t,InitialSearch:!f,Page:0,PageRange:3,QueryGuid:'',QueryString:'"
+        + encodedQuery
+        + "',ResultSize:50,ScenarioCode:CATALOGUE,ScenarioDisplayMode:display-standard,SearchGridFieldsShownOnResultsDTO:!(),SearchLabel:'',SearchTerms:'"
+        + encodedQuery
+        + "',SortField:!n,SortOrder:0,TemplateParams:(Scenario:'',Scope:Default,Size:!n,Source:'',Support:'',UseCompact:!f),UseSpellChecking:!n),sst:4)";
+    }
+
+    function selectedCountForGroup(group) {
+      return group.libraries.filter((library) => state.settings.selectedLibraries.includes(library)).length;
+    }
+
+    function setGroupSelection(group, checked) {
+      const selectedSet = new Set(state.settings.selectedLibraries);
+      group.libraries.forEach((library) => {
+        if (checked) selectedSet.add(library);
+        else selectedSet.delete(library);
+      });
+      state.settings.selectedLibraries = ALL_LIBRARIES.filter((item) => selectedSet.has(item));
+    }
+
+    function setAllLibraries(checked) {
+      state.settings.selectedLibraries = checked ? ALL_LIBRARIES.slice() : [];
+    }
+
+    function removeLibrary(library) {
+      state.settings.selectedLibraries = state.settings.selectedLibraries.filter((item) => item !== library);
+    }
+
+    function addLibrary(library) {
+      if (!LIBRARY_SET.has(library)) return;
+      if (state.settings.selectedLibraries.includes(library)) return;
+      state.settings.selectedLibraries = [...state.settings.selectedLibraries, library];
+      state.settings.selectedLibraries = ALL_LIBRARIES.filter((item) => state.settings.selectedLibraries.includes(item));
+    }
+
+    function createArrChip(label, stateValue, datasetId, isPressed) {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "arr-chip";
+      chip.dataset.state = stateValue;
+      if (datasetId) chip.dataset.arrondissement = datasetId;
+      else chip.dataset.all = "true";
+      chip.setAttribute("aria-pressed", isPressed ? "true" : "false");
+
+      const dot = document.createElement("span");
+      dot.className = "arr-chip-dot";
+      dot.setAttribute("aria-hidden", "true");
+      chip.appendChild(dot);
+      chip.appendChild(document.createTextNode(label));
+      return chip;
+    }
+
+    function renderArrondissementControls() {
+      DOM.arrondissementControls.innerHTML = "";
+
+      ARRONDISSEMENT_GROUPS.forEach((group) => {
+        const selectedCount = selectedCountForGroup(group);
+        const chipState = selectedCount === 0 ? "off" : selectedCount === group.libraries.length ? "on" : "partial";
+        DOM.arrondissementControls.appendChild(
+          createArrChip(group.arrondissement, chipState, group.arrondissement, selectedCount === group.libraries.length)
+        );
+      });
+    }
+
+    function renderSelectedLibraryChips() {
+      DOM.selectedLibrariesChips.innerHTML = "";
+      DOM.selectedCountHint.textContent = `Bibliothèques sélectionnées: ${state.settings.selectedLibraries.length}`;
+      if (!state.settings.selectedLibraries.length) {
+        DOM.selectedLibrariesChips.innerHTML = '<span class="hint">Aucune bibliothèque sélectionnée.</span>';
+        return;
+      }
+
+      state.settings.selectedLibraries.forEach((library) => {
+        const chip = document.createElement("span");
+        chip.className = "lib-chip";
+
+        const name = document.createElement("span");
+        name.className = "lib-name";
+        name.textContent = library;
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "remove-lib";
+        remove.dataset.library = library;
+        remove.setAttribute("aria-label", `Retirer ${library}`);
+        remove.textContent = "×";
+
+        chip.appendChild(name);
+        chip.appendChild(remove);
+        DOM.selectedLibrariesChips.appendChild(chip);
+      });
+    }
+
+    function renderAddPanels() {
+      DOM.addPanels.innerHTML = "";
+
+      const activeGroups = ARRONDISSEMENT_GROUPS.filter((group) => selectedCountForGroup(group) > 0);
+      if (!activeGroups.length) {
+        DOM.addPanels.innerHTML = '<div class="hint">Sélectionne un arrondissement pour ajouter des bibliothèques.</div>';
+        return;
+      }
+
+      const missingLibraries = activeGroups.flatMap((group) => (
+        group.libraries.filter((library) => !state.settings.selectedLibraries.includes(library))
+      ));
+
+      if (!missingLibraries.length) {
+        DOM.addPanels.innerHTML = '<div class="hint">Aucune suggestion.</div>';
+        return;
+      }
+
+      const list = document.createElement("div");
+      list.className = "add-list";
+      missingLibraries.forEach((library) => {
+        const add = document.createElement("button");
+        add.type = "button";
+        add.className = "add-chip";
+        add.dataset.addLibrary = library;
+        add.textContent = `+ ${library}`;
+        list.appendChild(add);
+      });
+      DOM.addPanels.appendChild(list);
     }
 
     function renderHints() {
@@ -519,7 +766,14 @@
       DOM.typeHint.textContent = explicitTypes.length
         ? `Types : ${explicitTypes.join(" + ")}`
         : "Types : (aucun) → fallback Livre + BD";
-      DOM.presetHint.textContent = `Bibliothèques : ${currentPreset().libraries.join(" · ")}`;
+    }
+
+    function renderAll() {
+      renderArrondissementControls();
+      renderSelectedLibraryChips();
+      renderAddPanels();
+      renderHints();
+      DOM.resetSelectionBtn.style.display = state.settings.selectedLibraries.length ? "" : "none";
     }
 
     function setQuery(value) {
@@ -532,39 +786,27 @@
     function openSearch(newTab) {
       const query = currentQuery();
       if (!query) {
-        renderHints();
         DOM.queryInput.focus();
         return;
       }
       const types = selectedTypesWithFallback();
-      const url = buildUrl(query, DOM.presetSelect.value, types);
-      if (newTab) {
-        window.open(url, "_blank", "noopener,noreferrer");
-      } else {
-        location.href = url;
-      }
+      const libraries = selectedLibrariesWithFallback();
+      const url = buildUrl(query, libraries, types);
+      if (newTab) window.open(url, "_blank", "noopener,noreferrer");
+      else location.href = url;
     }
 
-    function initPresetOptions(selectedPresetId) {
-      DOM.presetSelect.innerHTML = "";
-      PRESETS.forEach((preset) => {
-        const option = document.createElement("option");
-        option.value = preset.id;
-        option.textContent = preset.label;
-        DOM.presetSelect.appendChild(option);
-      });
-      DOM.presetSelect.value = selectedPresetId;
-    }
+    function onArrondissementChipClick(target) {
+      if (!(target instanceof HTMLButtonElement)) return;
 
-    function updateAndSaveSettings() {
-      saveSettings({
-        presetId: DOM.presetSelect.value,
-        types: {
-          book: DOM.bookType.checked,
-          bd: DOM.bdType.checked
-        },
-        theme: DOM.themeSelect.value
-      });
+      if (!target.dataset.arrondissement) return;
+      const group = ARRONDISSEMENT_GROUPS.find((item) => item.arrondissement === target.dataset.arrondissement);
+      if (!group) return;
+      const selectedCount = selectedCountForGroup(group);
+      const turnOn = selectedCount !== group.libraries.length;
+      setGroupSelection(group, turnOn);
+      saveSettings();
+      renderAll();
     }
 
     function bindEvents() {
@@ -573,44 +815,65 @@
         if (event.key === "Enter") openSearch(false);
       });
 
-      DOM.presetSelect.addEventListener("change", () => {
-        renderHints();
-        updateAndSaveSettings();
+      DOM.arrondissementControls.addEventListener("click", (event) => {
+        onArrondissementChipClick(event.target.closest("button.arr-chip"));
+      });
+
+      DOM.selectAllArrBtn.addEventListener("click", () => {
+        setAllLibraries(true);
+        saveSettings();
+        renderAll();
+      });
+
+      DOM.resetSelectionBtn.addEventListener("click", () => {
+        state.settings.selectedLibraries = [];
+        saveSettings();
+        renderAll();
+      });
+
+      DOM.selectedLibrariesChips.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLButtonElement)) return;
+        if (!target.dataset.library) return;
+        removeLibrary(target.dataset.library);
+        saveSettings();
+        renderAll();
+      });
+
+      DOM.addPanels.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLButtonElement)) return;
+        if (!target.dataset.addLibrary) return;
+        addLibrary(target.dataset.addLibrary);
+        saveSettings();
+        renderAll();
       });
 
       [DOM.bookType, DOM.bdType].forEach((checkbox) => {
         checkbox.addEventListener("change", () => {
+          state.settings.documentTypes = { book: DOM.bookType.checked, bd: DOM.bdType.checked };
+          saveSettings();
           renderHints();
-          updateAndSaveSettings();
         });
       });
 
       DOM.themeSelect.addEventListener("change", () => {
-        applyTheme(DOM.themeSelect.value);
-        updateAndSaveSettings();
+        state.settings.theme = DOM.themeSelect.value;
+        applyTheme(state.settings.theme);
+        saveSettings();
       });
 
       DOM.openHereBtn.addEventListener("click", () => openSearch(false));
       DOM.openNewTabBtn.addEventListener("click", () => openSearch(true));
-      DOM.clearBtn.addEventListener("click", () => setQuery(""));
-
-      DOM.quickChips.forEach((chip) => {
-        chip.addEventListener("click", () => {
-          setQuery(chip.dataset.query || "");
-          openSearch(false);
-        });
-      });
     }
 
     function init() {
-      const settings = loadSettings();
-      initPresetOptions(settings.presetId);
-      DOM.bookType.checked = settings.types.book;
-      DOM.bdType.checked = settings.types.bd;
-      DOM.themeSelect.value = settings.theme;
-      applyTheme(settings.theme);
+      DOM.bookType.checked = state.settings.documentTypes.book;
+      DOM.bdType.checked = state.settings.documentTypes.bd;
+      DOM.themeSelect.value = state.settings.theme;
+      applyTheme(state.settings.theme);
       bindEvents();
-      renderHints();
+      renderAll();
       setTimeout(() => DOM.queryInput.focus(), 50);
     }
 
