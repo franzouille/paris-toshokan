@@ -120,10 +120,61 @@
       color: var(--muted);
     }
 
-    .theme-select {
+    .theme-menu {
+      position: relative;
+    }
+
+    .theme-trigger {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--text);
+      background: var(--surface);
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+
+    .theme-trigger::-webkit-details-marker {
+      display: none;
+    }
+
+    .theme-panel {
+      position: absolute;
+      right: 0;
+      top: 40px;
+      z-index: 20;
+      width: min(92vw, 420px);
+      min-width: min(92vw, 320px);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 8px 10px;
+      background: var(--surface);
+      padding: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .settings-block + .settings-block {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    .theme-label {
+      margin: 0 0 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .theme-select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 8px;
       font-size: 13px;
       color: var(--text);
       background: var(--surface);
@@ -175,7 +226,8 @@
     .search-input::placeholder { color: var(--muted); }
 
     .search-field:focus-within,
-    .theme-select:focus {
+    .theme-select:focus,
+    .theme-trigger:focus-visible {
       outline: none;
       box-shadow: var(--focus-ring);
       border-color: var(--accent);
@@ -219,21 +271,35 @@
     }
 
     .arr-chip[data-state="on"] {
-      border-color: rgba(37, 99, 235, 0.55);
-      background: rgba(37, 99, 235, 0.16);
+      border-color: rgba(16, 185, 129, 0.65);
+      background: var(--surface);
     }
 
     .arr-chip[data-state="on"] .arr-chip-dot {
-      border-color: var(--accent);
-      background: var(--accent);
+      border-color: #10b981;
+      background: #10b981;
     }
 
     .arr-chip[data-state="partial"] {
-      border-color: rgba(16, 185, 129, 0.55);
-      background: rgba(16, 185, 129, 0.14);
+      border-color: var(--border);
+      background: var(--surface);
     }
 
     .arr-chip[data-state="partial"] .arr-chip-dot {
+      border-color: rgba(148, 163, 184, 0.8);
+      background: rgba(148, 163, 184, 0.55);
+    }
+
+    .arr-chip-count {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .arr-chip[data-selected="true"] {
+      border-color: rgba(16, 185, 129, 0.65);
+    }
+
+    .arr-chip[data-selected="true"] .arr-chip-dot {
       border-color: #10b981;
       background: #10b981;
     }
@@ -271,10 +337,30 @@
       border: 1px solid var(--border);
       border-radius: 999px;
       background: var(--surface);
-      padding: 6px 8px 6px 10px;
+      padding: 6px 10px;
       font-size: 12px;
       color: var(--text);
       max-width: 100%;
+      cursor: pointer;
+    }
+
+    .lib-chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(148, 163, 184, 0.5);
+      flex: 0 0 auto;
+    }
+
+    .lib-chip[data-state="on"] {
+      border-color: rgba(16, 185, 129, 0.65);
+      background: var(--surface);
+    }
+
+    .lib-chip[data-state="on"] .lib-chip-dot {
+      border-color: #10b981;
+      background: #10b981;
     }
 
     .lib-name {
@@ -282,55 +368,6 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       max-width: min(72vw, 420px);
-    }
-
-    .remove-lib {
-      border: 0;
-      width: 20px;
-      height: 20px;
-      border-radius: 999px;
-      background: rgba(148, 163, 184, 0.22);
-      color: var(--text);
-      cursor: pointer;
-      line-height: 1;
-      font-size: 14px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      flex: 0 0 auto;
-    }
-
-    .add-section {
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      background: var(--surface);
-      padding: 9px;
-      display: grid;
-      gap: 6px;
-    }
-
-    .add-panels {
-      display: block;
-    }
-
-    .add-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .add-chip {
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: var(--surface);
-      color: var(--text);
-      font-size: 12px;
-      padding: 5px 8px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .hint {
@@ -345,6 +382,19 @@
       gap: 10px;
       flex-wrap: wrap;
       padding: 10px 12px;
+    }
+
+    .type-list {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .theme-panel .type-list {
+      max-height: min(46vh, 280px);
+      overflow: auto;
+      padding-right: 2px;
     }
 
     .type-pill {
@@ -405,6 +455,17 @@
 
     @media (max-width: 760px) {
       .btn { flex: 1 1 auto; justify-content: center; }
+
+      .theme-panel {
+        position: fixed;
+        top: 56px;
+        right: 12px;
+        left: 12px;
+        width: auto;
+        min-width: 0;
+        max-height: 70vh;
+        overflow: auto;
+      }
     }
   </style>
 </head>
@@ -415,11 +476,24 @@
         <h1 class="title">Paris Toshokan</h1>
         <p class="baseline">Trouvez un livre dans les bibliothèques de Paris, sans vous battre avec les filtres.</p>
       </div>
-      <select id="themeSelect" class="theme-select" aria-label="Thème">
-        <option value="auto">Auto</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
+      <details class="theme-menu">
+        <summary class="theme-trigger" aria-label="Réglages">⚙</summary>
+        <div class="theme-panel">
+          <div class="settings-block">
+            <p class="theme-label">Thème</p>
+            <select id="themeSelect" class="theme-select" aria-label="Thème">
+              <option value="auto">Auto</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+          <div class="settings-block">
+            <p class="theme-label">Types de document</p>
+            <div id="documentTypeControls" class="type-list"></div>
+            <span class="hint" id="typeHint"></span>
+          </div>
+        </div>
+      </details>
     </header>
 
     <section class="panel" aria-label="Lanceur de recherche">
@@ -431,7 +505,7 @@
               <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2" />
               <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
             </svg>
-            <input id="queryInput" class="search-input" autocomplete="off" placeholder="Ex : homo sapiens tome 2, tardi burma, tintin..." />
+            <input id="queryInput" class="search-input" autocomplete="off" placeholder="Ex: Lucky Luke, Dumas..." />
           </label>
 
         </div>
@@ -446,7 +520,7 @@
         </div>
 
         <div>
-          <p class="section-label">Bibliothèques sélectionnées</p>
+          <p class="section-label">Bibliothèques</p>
           <div class="selected-libraries">
             <div class="hint" id="selectedCountHint"></div>
             <div id="selectedLibrariesChips" class="lib-chips"></div>
@@ -454,18 +528,9 @@
         </div>
 
         <div>
-          <p class="section-label">Ajouter des bibliothèques</p>
-          <div class="add-section">
-            <div id="addPanels" class="add-panels"></div>
-          </div>
-        </div>
-
-        <div>
           <p class="section-label">Type de document</p>
           <div class="types surface">
-            <label class="type-pill"><input type="checkbox" id="bookType" checked /> Livre</label>
-            <label class="type-pill"><input type="checkbox" id="bdType" checked /> BD</label>
-            <span class="hint" id="typeHint"></span>
+            <div id="activeDocumentTypeControls" class="type-list"></div>
           </div>
         </div>
 
@@ -554,6 +619,24 @@
       "75013 - Jean-Pierre Melville",
       "75013 - Virginia Woolf"
     ];
+    const DOCUMENT_TYPES = [
+      "Livre",
+      "BD",
+      "Musique",
+      "Film",
+      "Jeu vidéo",
+      "Livre en langue étrangère",
+      "Livre audio",
+      "Livre numérique",
+      "Partition",
+      "Console de jeu vidéo ou pack console",
+      "Jeu de société",
+      "Livre audio numérique",
+      "Méthode musicale",
+      "À consulter sur place"
+    ];
+    const DEFAULT_DOCUMENT_TYPES = ["Livre", "BD", "Musique", "Film", "Jeu vidéo"];
+    const DOCUMENT_TYPE_SET = new Set(DOCUMENT_TYPES);
 
     const STORAGE_KEY = "pbux_settings_v3";
     const LIBRARY_SET = new Set(ALL_LIBRARIES);
@@ -566,14 +649,14 @@
       arrondissementControls: document.getElementById("arrondissementControls"),
       selectedCountHint: document.getElementById("selectedCountHint"),
       selectedLibrariesChips: document.getElementById("selectedLibrariesChips"),
-      addPanels: document.getElementById("addPanels"),
-      bookType: document.getElementById("bookType"),
-      bdType: document.getElementById("bdType"),
+      activeDocumentTypeControls: document.getElementById("activeDocumentTypeControls"),
+      documentTypeControls: document.getElementById("documentTypeControls"),
       typeHint: document.getElementById("typeHint"),
       queryHint: document.getElementById("queryHint"),
       openHereBtn: document.getElementById("openHereBtn"),
       openNewTabBtn: document.getElementById("openNewTabBtn"),
-      themeSelect: document.getElementById("themeSelect")
+      themeSelect: document.getElementById("themeSelect"),
+      themeMenu: document.querySelector(".theme-menu")
     };
 
     const state = {
@@ -604,19 +687,44 @@
       return ALL_LIBRARIES.filter((item) => selectedSet.has(item));
     }
 
+    function normalizeDocumentTypes(types) {
+      const selectedSet = new Set(Array.isArray(types) ? types.filter((item) => DOCUMENT_TYPE_SET.has(item)) : []);
+      return DOCUMENT_TYPES.filter((item) => selectedSet.has(item));
+    }
+
     function loadSettings() {
       const stored = safeParseJSON(localStorage.getItem(STORAGE_KEY), {});
       const hasStoredSelection = Array.isArray(stored.selectedLibraries);
       const selectedLibraries = hasStoredSelection
         ? normalizeLibraries(stored.selectedLibraries)
         : normalizeLibraries(DEFAULT_SELECTED_LIBRARIES);
-      const storedDocumentTypes = stored.documentTypes || stored.types || {};
-      const book = storedDocumentTypes.book !== undefined ? !!storedDocumentTypes.book : true;
-      const bd = storedDocumentTypes.bd !== undefined ? !!storedDocumentTypes.bd : true;
+      const rawAvailableTypes = stored.availableDocumentTypes;
+      let availableDocumentTypes = normalizeDocumentTypes(rawAvailableTypes);
+      if (rawAvailableTypes === undefined) {
+        availableDocumentTypes = normalizeDocumentTypes(DEFAULT_DOCUMENT_TYPES);
+      }
+      if (!availableDocumentTypes.length) {
+        availableDocumentTypes = normalizeDocumentTypes(DEFAULT_DOCUMENT_TYPES);
+      }
+
+      const rawSelectedTypes = stored.documentTypes ?? stored.types;
+      let documentTypes = normalizeDocumentTypes(rawSelectedTypes);
+      if (!documentTypes.length && rawSelectedTypes && !Array.isArray(rawSelectedTypes) && typeof rawSelectedTypes === "object") {
+        const oldTypes = rawSelectedTypes;
+        const migrated = [];
+        if (oldTypes.book) migrated.push("Livre");
+        if (oldTypes.bd) migrated.push("BD");
+        documentTypes = normalizeDocumentTypes(migrated);
+      }
+      if (rawSelectedTypes === undefined) {
+        documentTypes = availableDocumentTypes.slice();
+      }
+      documentTypes = documentTypes.filter((type) => availableDocumentTypes.includes(type));
       const theme = ["auto", "light", "dark"].includes(stored.theme) ? stored.theme : "auto";
       return {
         selectedLibraries,
-        documentTypes: { book, bd },
+        availableDocumentTypes,
+        documentTypes,
         theme
       };
     }
@@ -626,6 +734,7 @@
         STORAGE_KEY,
         JSON.stringify({
           selectedLibraries: state.settings.selectedLibraries,
+          availableDocumentTypes: state.settings.availableDocumentTypes,
           documentTypes: state.settings.documentTypes,
           theme: state.settings.theme
         })
@@ -639,10 +748,7 @@
     }
 
     function currentCheckedTypes() {
-      const types = [];
-      if (DOM.bookType.checked) types.push("Livre");
-      if (DOM.bdType.checked) types.push("BD");
-      return types;
+      return state.settings.documentTypes.slice();
     }
 
     function selectedTypesWithFallback() {
@@ -691,22 +797,20 @@
       state.settings.selectedLibraries = checked ? ALL_LIBRARIES.slice() : [];
     }
 
-    function removeLibrary(library) {
-      state.settings.selectedLibraries = state.settings.selectedLibraries.filter((item) => item !== library);
-    }
-
-    function addLibrary(library) {
+    function toggleLibrary(library) {
       if (!LIBRARY_SET.has(library)) return;
-      if (state.settings.selectedLibraries.includes(library)) return;
-      state.settings.selectedLibraries = [...state.settings.selectedLibraries, library];
-      state.settings.selectedLibraries = ALL_LIBRARIES.filter((item) => state.settings.selectedLibraries.includes(item));
+      const selectedSet = new Set(state.settings.selectedLibraries);
+      if (selectedSet.has(library)) selectedSet.delete(library);
+      else selectedSet.add(library);
+      state.settings.selectedLibraries = ALL_LIBRARIES.filter((item) => selectedSet.has(item));
     }
 
-    function createArrChip(label, stateValue, datasetId, isPressed) {
+    function createArrChip(label, stateValue, datasetId, isPressed, countText, isSelected) {
       const chip = document.createElement("button");
       chip.type = "button";
       chip.className = "arr-chip";
       chip.dataset.state = stateValue;
+      chip.dataset.selected = isSelected ? "true" : "false";
       if (datasetId) chip.dataset.arrondissement = datasetId;
       else chip.dataset.all = "true";
       chip.setAttribute("aria-pressed", isPressed ? "true" : "false");
@@ -716,7 +820,43 @@
       dot.setAttribute("aria-hidden", "true");
       chip.appendChild(dot);
       chip.appendChild(document.createTextNode(label));
+      if (countText) {
+        const count = document.createElement("span");
+        count.className = "arr-chip-count";
+        count.textContent = countText;
+        chip.appendChild(count);
+      }
       return chip;
+    }
+
+    function renderDocumentTypeControls() {
+      DOM.documentTypeControls.innerHTML = "";
+      DOCUMENT_TYPES.forEach((type) => {
+        const label = document.createElement("label");
+        label.className = "type-pill";
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.dataset.type = type;
+        input.checked = state.settings.availableDocumentTypes.includes(type);
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(type));
+        DOM.documentTypeControls.appendChild(label);
+      });
+    }
+
+    function renderActiveDocumentTypeControls() {
+      DOM.activeDocumentTypeControls.innerHTML = "";
+      state.settings.availableDocumentTypes.forEach((type) => {
+        const label = document.createElement("label");
+        label.className = "type-pill";
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.dataset.activeType = type;
+        input.checked = state.settings.documentTypes.includes(type);
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(type));
+        DOM.activeDocumentTypeControls.appendChild(label);
+      });
     }
 
     function renderArrondissementControls() {
@@ -726,84 +866,61 @@
         const selectedCount = selectedCountForGroup(group);
         const chipState = selectedCount === 0 ? "off" : selectedCount === group.libraries.length ? "on" : "partial";
         DOM.arrondissementControls.appendChild(
-          createArrChip(group.arrondissement, chipState, group.arrondissement, selectedCount === group.libraries.length)
+          createArrChip(
+            group.arrondissement,
+            chipState,
+            group.arrondissement,
+            selectedCount === group.libraries.length,
+            `${selectedCount}/${group.libraries.length}`,
+            selectedCount > 0
+          )
         );
       });
     }
 
     function renderSelectedLibraryChips() {
       DOM.selectedLibrariesChips.innerHTML = "";
-      DOM.selectedCountHint.textContent = `Bibliothèques sélectionnées: ${state.settings.selectedLibraries.length}`;
-      if (!state.settings.selectedLibraries.length) {
-        DOM.selectedLibrariesChips.innerHTML = '<span class="hint">Aucune bibliothèque sélectionnée.</span>';
+      const activeGroups = ARRONDISSEMENT_GROUPS.filter((group) => selectedCountForGroup(group) > 0);
+      if (!activeGroups.length) {
+        DOM.selectedCountHint.textContent = "Bibliothèques";
+        DOM.selectedLibrariesChips.innerHTML = '<span class="hint">Sélectionnez au moins un arrondissement</span>';
         return;
       }
 
-      state.settings.selectedLibraries.forEach((library) => {
-        const chip = document.createElement("span");
-        chip.className = "lib-chip";
+      const visibleLibrariesSet = new Set(activeGroups.flatMap((group) => group.libraries));
+      const visibleLibraries = ALL_LIBRARIES.filter((library) => visibleLibrariesSet.has(library));
+      DOM.selectedCountHint.textContent = `Bibliothèques: ${state.settings.selectedLibraries.length}`;
 
+      visibleLibraries.forEach((library) => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "lib-chip";
+        chip.dataset.library = library;
+        chip.dataset.state = state.settings.selectedLibraries.includes(library) ? "on" : "off";
+
+        const dot = document.createElement("span");
+        dot.className = "lib-chip-dot";
+        dot.setAttribute("aria-hidden", "true");
         const name = document.createElement("span");
         name.className = "lib-name";
         name.textContent = library;
 
-        const remove = document.createElement("button");
-        remove.type = "button";
-        remove.className = "remove-lib";
-        remove.dataset.library = library;
-        remove.setAttribute("aria-label", `Retirer ${library}`);
-        remove.textContent = "×";
-
+        chip.appendChild(dot);
         chip.appendChild(name);
-        chip.appendChild(remove);
         DOM.selectedLibrariesChips.appendChild(chip);
       });
     }
 
-    function renderAddPanels() {
-      DOM.addPanels.innerHTML = "";
-
-      const activeGroups = ARRONDISSEMENT_GROUPS.filter((group) => selectedCountForGroup(group) > 0);
-      if (!activeGroups.length) {
-        DOM.addPanels.innerHTML = '<div class="hint">Sélectionne un arrondissement pour ajouter des bibliothèques.</div>';
-        return;
-      }
-
-      const missingLibraries = activeGroups.flatMap((group) => (
-        group.libraries.filter((library) => !state.settings.selectedLibraries.includes(library))
-      ));
-
-      if (!missingLibraries.length) {
-        DOM.addPanels.innerHTML = '<div class="hint">Aucune suggestion.</div>';
-        return;
-      }
-
-      const list = document.createElement("div");
-      list.className = "add-list";
-      missingLibraries.forEach((library) => {
-        const add = document.createElement("button");
-        add.type = "button";
-        add.className = "add-chip";
-        add.dataset.addLibrary = library;
-        add.textContent = `+ ${library}`;
-        list.appendChild(add);
-      });
-      DOM.addPanels.appendChild(list);
-    }
-
     function renderHints() {
-      const query = currentQuery();
-      const explicitTypes = currentCheckedTypes();
-      DOM.queryHint.textContent = query ? `Recherche : “${query}”` : "";
-      DOM.typeHint.textContent = explicitTypes.length
-        ? `Types : ${explicitTypes.join(" + ")}`
-        : "Types : (aucun) → fallback Livre + BD";
+      DOM.queryHint.textContent = "";
+      DOM.typeHint.textContent = "";
     }
 
     function renderAll() {
       renderArrondissementControls();
       renderSelectedLibraryChips();
-      renderAddPanels();
+      renderDocumentTypeControls();
+      renderActiveDocumentTypeControls();
       renderHints();
       DOM.resetSelectionBtn.style.display = state.settings.selectedLibraries.length ? "" : "none";
     }
@@ -864,29 +981,40 @@
       });
 
       DOM.selectedLibrariesChips.addEventListener("click", (event) => {
-        const target = event.target;
+        const target = event.target.closest("button.lib-chip");
         if (!(target instanceof HTMLButtonElement)) return;
         if (!target.dataset.library) return;
-        removeLibrary(target.dataset.library);
+        toggleLibrary(target.dataset.library);
         saveSettings();
         renderAll();
       });
 
-      DOM.addPanels.addEventListener("click", (event) => {
+      DOM.documentTypeControls.addEventListener("change", (event) => {
         const target = event.target;
-        if (!(target instanceof HTMLButtonElement)) return;
-        if (!target.dataset.addLibrary) return;
-        addLibrary(target.dataset.addLibrary);
+        if (!(target instanceof HTMLInputElement)) return;
+        if (target.type !== "checkbox" || !target.dataset.type) return;
+        const availableSet = new Set(state.settings.availableDocumentTypes);
+        if (target.checked) availableSet.add(target.dataset.type);
+        else availableSet.delete(target.dataset.type);
+        state.settings.availableDocumentTypes = DOCUMENT_TYPES.filter((type) => availableSet.has(type));
+        state.settings.documentTypes = state.settings.documentTypes.filter((type) => availableSet.has(type));
+        if (!state.settings.documentTypes.length && state.settings.availableDocumentTypes.length) {
+          state.settings.documentTypes = state.settings.availableDocumentTypes.slice();
+        }
         saveSettings();
         renderAll();
       });
 
-      [DOM.bookType, DOM.bdType].forEach((checkbox) => {
-        checkbox.addEventListener("change", () => {
-          state.settings.documentTypes = { book: DOM.bookType.checked, bd: DOM.bdType.checked };
-          saveSettings();
-          renderHints();
-        });
+      DOM.activeDocumentTypeControls.addEventListener("change", (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLInputElement)) return;
+        if (target.type !== "checkbox" || !target.dataset.activeType) return;
+        const selectedSet = new Set(state.settings.documentTypes);
+        if (target.checked) selectedSet.add(target.dataset.activeType);
+        else selectedSet.delete(target.dataset.activeType);
+        state.settings.documentTypes = state.settings.availableDocumentTypes.filter((type) => selectedSet.has(type));
+        saveSettings();
+        renderAll();
       });
 
       DOM.themeSelect.addEventListener("change", () => {
@@ -895,13 +1023,19 @@
         saveSettings();
       });
 
+      document.addEventListener("click", (event) => {
+        if (!DOM.themeMenu || !DOM.themeMenu.hasAttribute("open")) return;
+        const target = event.target;
+        if (target instanceof Node && !DOM.themeMenu.contains(target)) {
+          DOM.themeMenu.removeAttribute("open");
+        }
+      });
+
       DOM.openHereBtn.addEventListener("click", () => openSearch(false));
       DOM.openNewTabBtn.addEventListener("click", () => openSearch(true));
     }
 
     function init() {
-      DOM.bookType.checked = state.settings.documentTypes.book;
-      DOM.bdType.checked = state.settings.documentTypes.bd;
       DOM.themeSelect.value = state.settings.theme;
       applyTheme(state.settings.theme);
       bindEvents();
