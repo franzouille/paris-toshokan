@@ -15,14 +15,21 @@
       --bg-grad-1: rgba(59, 130, 246, 0.12);
       --bg-grad-2: rgba(16, 185, 129, 0.1);
       --text: #0f172a;
-      --muted: #475569;
+      --muted: #3f4f66;
+      --placeholder: #64748b;
       --panel: rgba(255, 255, 255, 0.84);
       --surface: rgba(248, 250, 252, 0.96);
-      --border: rgba(15, 23, 42, 0.12);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-soft: rgba(15, 23, 42, 0.06);
+      --border-strong: rgba(15, 23, 42, 0.16);
       --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
       --accent: #2563eb;
+      --accent-btn-top: #5f9ff0;
+      --accent-btn-base: #2f6ddc;
       --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.28);
       --button-text: #f8fafc;
+      --icon-secondary: #5f7088;
+      --icon-primary: #334a66;
       --radius-lg: 18px;
       --radius-md: 14px;
     }
@@ -34,14 +41,21 @@
         --bg-grad-1: rgba(96, 165, 250, 0.24);
         --bg-grad-2: rgba(34, 197, 94, 0.18);
         --text: #e5e7eb;
-        --muted: #94a3b8;
+        --muted: #a9b6c9;
+        --placeholder: #8291a8;
         --panel: rgba(17, 24, 39, 0.84);
         --surface: rgba(11, 18, 32, 0.68);
-        --border: rgba(148, 163, 184, 0.24);
+        --border: rgba(148, 163, 184, 0.18);
+        --border-soft: rgba(148, 163, 184, 0.14);
+        --border-strong: rgba(148, 163, 184, 0.3);
         --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
         --accent: #60a5fa;
+        --accent-btn-top: #4f86c8;
+        --accent-btn-base: #3f6fae;
         --focus-ring: 0 0 0 3px rgba(96, 165, 250, 0.32);
         --button-text: #07101f;
+        --icon-secondary: #a6b5c9;
+        --icon-primary: #c2d0e0;
       }
     }
 
@@ -51,14 +65,21 @@
       --bg-grad-1: rgba(59, 130, 246, 0.12);
       --bg-grad-2: rgba(16, 185, 129, 0.1);
       --text: #0f172a;
-      --muted: #475569;
+      --muted: #3f4f66;
+      --placeholder: #64748b;
       --panel: rgba(255, 255, 255, 0.84);
       --surface: rgba(248, 250, 252, 0.96);
-      --border: rgba(15, 23, 42, 0.12);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-soft: rgba(15, 23, 42, 0.06);
+      --border-strong: rgba(15, 23, 42, 0.16);
       --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
       --accent: #2563eb;
+      --accent-btn-top: #5f9ff0;
+      --accent-btn-base: #2f6ddc;
       --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.28);
       --button-text: #f8fafc;
+      --icon-secondary: #5f7088;
+      --icon-primary: #334a66;
     }
 
     :root[data-theme="dark"] {
@@ -67,14 +88,21 @@
       --bg-grad-1: rgba(96, 165, 250, 0.24);
       --bg-grad-2: rgba(34, 197, 94, 0.18);
       --text: #e5e7eb;
-      --muted: #94a3b8;
+      --muted: #a9b6c9;
+      --placeholder: #8291a8;
       --panel: rgba(17, 24, 39, 0.84);
       --surface: rgba(11, 18, 32, 0.68);
-      --border: rgba(148, 163, 184, 0.24);
+      --border: rgba(148, 163, 184, 0.18);
+      --border-soft: rgba(148, 163, 184, 0.14);
+      --border-strong: rgba(148, 163, 184, 0.3);
       --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
       --accent: #60a5fa;
+      --accent-btn-top: #4f86c8;
+      --accent-btn-base: #3f6fae;
       --focus-ring: 0 0 0 3px rgba(96, 165, 250, 0.32);
       --button-text: #07101f;
+      --icon-secondary: #a6b5c9;
+      --icon-primary: #c2d0e0;
     }
 
     * { box-sizing: border-box; }
@@ -102,10 +130,15 @@
 
     .app-header {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 8px;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+    }
+
+    .app-header > div {
+      flex: 1 1 auto;
+      min-width: 0;
     }
 
     .title {
@@ -122,19 +155,22 @@
 
     .theme-menu {
       position: relative;
+      flex: 0 0 auto;
+      margin-left: auto;
+      align-self: flex-start;
     }
 
     .theme-trigger {
       border: 1px solid var(--border);
       border-radius: 999px;
-      width: 34px;
-      height: 34px;
+      width: 44px;
+      height: 44px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
-      color: var(--text);
-      background: var(--surface);
+      font-size: 18px;
+      color: var(--icon-secondary);
+      background: transparent;
       cursor: pointer;
       list-style: none;
       user-select: none;
@@ -147,7 +183,7 @@
     .theme-panel {
       position: absolute;
       right: 0;
-      top: 40px;
+      top: 48px;
       z-index: 20;
       width: min(92vw, 420px);
       min-width: min(92vw, 320px);
@@ -155,13 +191,13 @@
       border-radius: 10px;
       background: var(--surface);
       padding: 8px;
-      box-shadow: var(--shadow);
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
     }
 
     .settings-block + .settings-block {
       margin-top: 8px;
       padding-top: 8px;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--border-soft);
     }
 
     .theme-label {
@@ -181,7 +217,7 @@
     }
 
     .panel {
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-strong);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow);
       background: var(--panel);
@@ -190,14 +226,29 @@
     }
 
     .panel-body {
-      padding: 12px;
+      padding: 14px;
       display: grid;
-      gap: 10px;
+      gap: 14px;
     }
 
-    .section-label {
-      margin: 0 0 6px;
+    .section-title {
+      margin: 0 0 8px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.15px;
+    }
+
+    .section-title-optional {
       font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .section-label,
+    .section-subtitle {
+      margin: 0 0 6px;
+      font-size: 12px;
       color: var(--muted);
     }
 
@@ -223,9 +274,19 @@
       font-size: 16px;
     }
 
-    .search-input::placeholder { color: var(--muted); }
+    .search-input::placeholder { color: var(--placeholder); }
+
+    .search-field {
+      border-color: var(--border-strong);
+    }
+
+    .search-field svg {
+      color: var(--icon-primary);
+      opacity: 0.82;
+    }
 
     .search-field:focus-within,
+    .filters-summary:focus-visible,
     .theme-select:focus,
     .theme-trigger:focus-visible {
       outline: none;
@@ -233,8 +294,99 @@
       border-color: var(--accent);
     }
 
+    .search-hero {
+      display: grid;
+      gap: 10px;
+    }
+
+    .search-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-row .search-field {
+      flex: 1 1 auto;
+    }
+
+    .search-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: nowrap;
+    }
+
+    .filters-section {
+      display: grid;
+      gap: 8px;
+    }
+
+    .filters-details {
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .filters-summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 12px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .filters-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .filters-summary-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .filters-title {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .filters-chevron {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .filters-details[open] .filters-chevron {
+      transform: rotate(180deg);
+    }
+
+    .filters-summary-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .filters-summary-item {
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      padding: 4px 8px;
+    }
+
+    .filters-content {
+      padding: 0 12px 12px;
+      display: grid;
+      gap: 12px;
+    }
+
     .arrondissements {
-      padding: 8px;
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
@@ -265,7 +417,7 @@
       width: 7px;
       height: 7px;
       border-radius: 999px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-soft);
       background: transparent;
       flex: 0 0 auto;
     }
@@ -315,14 +467,17 @@
       min-height: 30px;
     }
 
-    .selected-libraries {
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      background: var(--surface);
-      padding: 9px;
-      display: grid;
-      gap: 6px;
+    .arr-action:focus-visible,
+    .arr-chip:focus-visible,
+    .lib-chip:focus-visible,
+    .filters-summary:focus-visible,
+    .btn:focus-visible,
+    .type-pill input:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
     }
+
+    .selected-libraries { display: grid; gap: 6px; }
 
     .lib-chips {
       display: flex;
@@ -381,7 +536,11 @@
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
-      padding: 10px 12px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
     }
 
     .type-list {
@@ -397,6 +556,18 @@
       padding-right: 2px;
     }
 
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     .type-pill {
       display: inline-flex;
       align-items: center;
@@ -407,25 +578,16 @@
 
     .type-pill input { width: 16px; height: 16px; }
 
-    .actions {
+    .reset-control {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .action-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+      justify-content: flex-start;
     }
 
     .btn {
       appearance: none;
       border: 0;
       border-radius: var(--radius-md);
-      padding: 11px 13px;
+      padding: 10px 12px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -442,29 +604,75 @@
 
     .btn-primary {
       color: var(--button-text);
-      background: linear-gradient(180deg, #60a5fa, var(--accent));
-      box-shadow: 0 10px 24px rgba(59, 130, 246, 0.3);
+      background: linear-gradient(180deg, var(--accent-btn-top), var(--accent-btn-base));
+      box-shadow: 0 1px 3px rgba(59, 130, 246, 0.12);
     }
 
-    .btn-secondary {
-      color: var(--text);
-      border: 1px solid var(--border);
-      background: var(--surface);
-      font-weight: 600;
+    .btn-quiet {
+      color: var(--icon-secondary);
+      border: 0;
+      background: transparent;
+      padding: 8px 6px;
+      font-weight: 500;
+      opacity: 0.7;
+      min-width: 36px;
+      min-height: 36px;
+      justify-content: center;
+    }
+
+    .btn-quiet:hover,
+    .btn-quiet:focus-visible {
+      opacity: 1;
     }
 
     @media (max-width: 760px) {
-      .btn { flex: 1 1 auto; justify-content: center; }
+      .app-header {
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+      }
+
+      .theme-menu {
+        position: relative;
+        margin-left: auto;
+        align-self: flex-start;
+        top: auto;
+        right: auto;
+        left: auto;
+        bottom: auto;
+        transform: none;
+      }
+
+      .search-row {
+        display: grid;
+        gap: 8px;
+      }
+
+      .search-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .btn-primary {
+        width: auto;
+        min-height: 36px;
+        padding: 7px 11px;
+        justify-content: center;
+        box-shadow: none;
+      }
 
       .theme-panel {
-        position: fixed;
-        top: 56px;
-        right: 12px;
-        left: 12px;
-        width: auto;
+        right: 0;
+        left: auto;
+        width: min(92vw, 360px);
         min-width: 0;
         max-height: 70vh;
         overflow: auto;
+      }
+
+      .filters-summary-list {
+        display: grid;
+        gap: 6px;
       }
     }
   </style>
@@ -477,7 +685,7 @@
         <p class="baseline">Trouvez un livre dans les bibliothèques de Paris, sans vous battre avec les filtres.</p>
       </div>
       <details class="theme-menu">
-        <summary class="theme-trigger" aria-label="Réglages">⚙</summary>
+        <summary class="theme-trigger" aria-label="Préférences" title="Préférences">⚙</summary>
         <div class="theme-panel">
           <div class="settings-block">
             <p class="theme-label">Thème</p>
@@ -498,50 +706,70 @@
 
     <section class="panel" aria-label="Lanceur de recherche">
       <div class="panel-body">
-        <div>
-          <p class="section-label">Recherche</p>
-          <label class="search-field surface" for="queryInput">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2" />
-              <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-            </svg>
-            <input id="queryInput" class="search-input" autocomplete="off" placeholder="Ex: Lucky Luke, Dumas..." />
-          </label>
-
-        </div>
-
-        <div>
-          <p class="section-label">Arrondissements</p>
-          <div class="arr-actions">
-            <button id="selectAllArrBtn" type="button" class="arr-action">Tous les arrondissements</button>
-            <button id="resetSelectionBtn" type="button" class="arr-action">Réinitialiser</button>
+        <section class="search-hero" aria-labelledby="recherche-heading">
+          <h2 id="recherche-heading" class="section-title">Recherche</h2>
+          <div class="search-row">
+            <label class="search-field surface" for="queryInput">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2" />
+                <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+              <input id="queryInput" class="search-input" autocomplete="off" placeholder="Ex: Lucky Luke, Dumas..." />
+            </label>
+            <div class="search-actions">
+              <button class="btn btn-primary" id="openHereBtn" type="button">Rechercher</button>
+              <button class="btn btn-quiet" id="openNewTabBtn" type="button" title="Ouvrir dans un nouvel onglet" aria-label="Ouvrir dans un nouvel onglet">↗</button>
+            </div>
           </div>
-          <div id="arrondissementControls" class="surface arrondissements" aria-label="Sélection des arrondissements"></div>
-        </div>
+        </section>
 
-        <div>
-          <p class="section-label">Bibliothèques</p>
-          <div class="selected-libraries">
-            <div class="hint" id="selectedCountHint"></div>
-            <div id="selectedLibrariesChips" class="lib-chips"></div>
-          </div>
-        </div>
+        <section class="filters-section" aria-labelledby="filtres-heading">
+          <h2 id="filtres-heading" class="section-title section-title-optional">Filtres</h2>
+          <details id="filtersDetails" class="filters-details">
+            <summary class="filters-summary" aria-controls="filtersContent">
+              <div class="filters-summary-top">
+                <p id="filtersToggleLabel" class="filters-title">Afficher</p>
+                <span class="filters-chevron" aria-hidden="true">▾</span>
+              </div>
+              <ul class="filters-summary-list" aria-live="polite">
+                <li class="filters-summary-item" id="summaryArrondissements">Arrondissements: Tous</li>
+                <li class="filters-summary-item" id="summaryLibraries">Bibliothèques: Auto</li>
+                <li class="filters-summary-item" id="summaryTypes">Types de document: Auto</li>
+              </ul>
+            </summary>
+            <div id="filtersContent" class="filters-content">
+              <section aria-labelledby="arrondissements-heading">
+                <h3 id="arrondissements-heading" class="section-subtitle">Arrondissements</h3>
+                <div class="arr-actions">
+                  <button id="selectAllArrBtn" type="button" class="arr-action">Tous les arrondissements</button>
+                </div>
+                <div id="arrondissementControls" class="arrondissements" aria-label="Sélection des arrondissements"></div>
+              </section>
 
-        <div>
-          <p class="section-label">Type de document</p>
-          <div class="types surface">
-            <div id="activeDocumentTypeControls" class="type-list"></div>
-          </div>
-        </div>
+              <section aria-labelledby="bibliotheques-heading">
+                <h3 id="bibliotheques-heading" class="section-subtitle">Bibliothèques</h3>
+                <div class="selected-libraries">
+                  <div class="hint" id="selectedCountHint"></div>
+                  <div id="selectedLibrariesChips" class="lib-chips"></div>
+                </div>
+              </section>
 
-        <div class="actions">
-          <div class="action-group">
-            <button class="btn btn-primary" id="openHereBtn" type="button">Ouvrir ici <span aria-hidden="true">↗</span></button>
-            <button class="btn btn-secondary" id="openNewTabBtn" type="button">Ouvrir dans un nouvel onglet <span aria-hidden="true">⤢</span></button>
-          </div>
-          <div class="hint" id="queryHint"></div>
-        </div>
+              <section aria-labelledby="types-heading">
+                <h3 id="types-heading" class="section-subtitle">Types de document</h3>
+                <fieldset class="types" aria-label="Types de document actifs">
+                  <legend class="sr-only">Types de document actifs</legend>
+                  <div id="activeDocumentTypeControls" class="type-list"></div>
+                </fieldset>
+              </section>
 
+              <div class="reset-control">
+                <button id="resetSelectionBtn" type="button" class="arr-action">Réinitialiser les filtres</button>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <div class="hint" id="queryHint"></div>
       </div>
     </section>
   </main>
@@ -655,6 +883,11 @@
       queryHint: document.getElementById("queryHint"),
       openHereBtn: document.getElementById("openHereBtn"),
       openNewTabBtn: document.getElementById("openNewTabBtn"),
+      filtersDetails: document.getElementById("filtersDetails"),
+      summaryArrondissements: document.getElementById("summaryArrondissements"),
+      summaryLibraries: document.getElementById("summaryLibraries"),
+      summaryTypes: document.getElementById("summaryTypes"),
+      filtersToggleLabel: document.getElementById("filtersToggleLabel"),
       themeSelect: document.getElementById("themeSelect"),
       themeMenu: document.querySelector(".theme-menu")
     };
@@ -916,11 +1149,36 @@
       DOM.typeHint.textContent = "";
     }
 
+    function formatTypesSummary() {
+      return summarizeSelection(currentCheckedTypes(), { zero: "Auto" });
+    }
+
+    function summarizeSelection(items, options = {}) {
+      const list = Array.isArray(items) ? items.filter(Boolean) : [];
+      if (list.length === 0) return options.zero || "Auto";
+      if (list.length <= 2) return list.join(", ");
+      if (list.length <= 5) return `${list.slice(0, 2).join(", ")} +${list.length - 2}`;
+      return `${list.length} sélectionnés`;
+    }
+
+    function renderFilterSummary() {
+      const activeGroups = ARRONDISSEMENT_GROUPS.filter((group) => selectedCountForGroup(group) > 0);
+      const arrLabels = activeGroups.map((group) => group.arrondissement);
+      const arrText = summarizeSelection(arrLabels, { zero: "Tous" });
+
+      const librariesText = summarizeSelection(state.settings.selectedLibraries, { zero: "Auto" });
+
+      DOM.summaryArrondissements.textContent = `Arrondissements: ${arrText}`;
+      DOM.summaryLibraries.textContent = `Bibliothèques: ${librariesText}`;
+      DOM.summaryTypes.textContent = `Types de document: ${formatTypesSummary()}`;
+    }
+
     function renderAll() {
       renderArrondissementControls();
       renderSelectedLibraryChips();
       renderDocumentTypeControls();
       renderActiveDocumentTypeControls();
+      renderFilterSummary();
       renderHints();
       DOM.resetSelectionBtn.style.display = state.settings.selectedLibraries.length ? "" : "none";
     }
@@ -1031,6 +1289,11 @@
         }
       });
 
+      DOM.filtersDetails.addEventListener("toggle", () => {
+        if (!DOM.filtersToggleLabel) return;
+        DOM.filtersToggleLabel.textContent = DOM.filtersDetails.open ? "Masquer" : "Afficher";
+      });
+
       DOM.openHereBtn.addEventListener("click", () => openSearch(false));
       DOM.openNewTabBtn.addEventListener("click", () => openSearch(true));
     }
@@ -1040,6 +1303,9 @@
       applyTheme(state.settings.theme);
       bindEvents();
       renderAll();
+      if (DOM.filtersToggleLabel) {
+        DOM.filtersToggleLabel.textContent = DOM.filtersDetails && DOM.filtersDetails.open ? "Masquer" : "Afficher";
+      }
       setTimeout(() => DOM.queryInput.focus(), 50);
     }
 
