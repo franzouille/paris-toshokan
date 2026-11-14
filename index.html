@@ -532,9 +532,11 @@
     }
 
     function buildUrl(query, libraries, selectedTypes) {
-      // encodeURIComponent leaves apostrophes unescaped, but this query value
-      // is embedded inside apostrophe-delimited Syracuse syntax.
-      const encodedQuery = encodeURIComponent(query).replace(/'/g, "%27");
+      // Syracuse puts query values inside apostrophe-delimited hash syntax.
+      // Treat apostrophes as punctuation so they cannot break that syntax or
+      // be passed to search as a literal "%27" token.
+      const safeQuery = query.replace(/[’']/g, " ").replace(/\s+/g, " ").trim();
+      const encodedQuery = encodeURIComponent(safeQuery);
       const facetFilter = encodeFacetFilter(libraries, selectedTypes);
       return "https://bibliotheques.paris.fr/search.aspx#/Search/(query:(CloudTerms:!(),FacetFilter:'"
         + facetFilter
